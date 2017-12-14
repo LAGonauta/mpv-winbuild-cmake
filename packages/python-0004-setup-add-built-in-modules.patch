@@ -1,0 +1,47 @@
+From 992cd1ce15714363a51977fdecfcdc26cf5cc293 Mon Sep 17 00:00:00 2001
+From: shinchiro <shinchiro@users.noreply.github.com>
+Date: Thu, 14 Dec 2017 17:47:46 +0800
+Subject: [PATCH] setup: add built-in modules
+
+These modules will be statically link to library
+---
+ Modules/Setup.local | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 Modules/Setup.local
+
+diff --git a/Modules/Setup.local b/Modules/Setup.local
+new file mode 100644
+index 000000000..a1e4f6f9e
+--- /dev/null
++++ b/Modules/Setup.local
+@@ -0,0 +1,27 @@
++# Edit this file for local setup changes
++
++*static*
++array arraymodule.c	# array objects
++cmath cmathmodule.c _math.c # -lm # complex math library functions
++math mathmodule.c _math.c # -lm # math library functions, e.g. sin()
++_struct _struct.c	# binary structure packing/unpacking
++_weakref _weakref.c	# basic weak reference support
++_testcapi _testcapimodule.c    # Python C API test module
++_random _randommodule.c	# Random number generator
++_elementtree -I$(srcdir)/Modules/expat -DHAVE_EXPAT_CONFIG_H -DUSE_PYEXPAT_CAPI _elementtree.c	# elementtree accelerator
++_pickle _pickle.c	# pickle accelerator
++_datetime _datetimemodule.c	# datetime accelerator
++_bisect _bisectmodule.c	# Bisection algorithms
++_heapq _heapqmodule.c	# Heap queue algorithm
++_asyncio _asynciomodule.c  # Fast asyncio Future
++
++unicodedata unicodedata.c    # static Unicode character database
++mmap mmapmodule.c
++_csv _csv.c
++_socket socketmodule.c
++_md5 md5module.c
++_sha1 sha1module.c
++_sha256 sha256module.c
++_sha512 sha512module.c
++_sha3 _sha3/sha3module.c
++audioop audioop.c
+-- 
+2.15.0
+

@@ -1,0 +1,43 @@
+From 099f789f7701a225349fa200bf46dcebe12a03e6 Mon Sep 17 00:00:00 2001
+From: shinchiro <shinchiro@users.noreply.github.com>
+Date: Tue, 12 Dec 2017 09:51:06 +0800
+Subject: [PATCH] _testapimodule: Fix compile error in static mode
+
+---
+ Modules/_testcapimodule.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/Modules/_testcapimodule.c b/Modules/_testcapimodule.c
+index ede675d..465b6ab 100644
+--- a/Modules/_testcapimodule.c
++++ b/Modules/_testcapimodule.c
+@@ -2201,6 +2201,7 @@ test_set_exc_info(PyObject *self, PyObject *args)
+     return orig_exc;
+ }
+ 
++#if defined(Py_USING_UNICODE) && !defined(Py_BUILD_CORE)
+ static int test_run_counter = 0;
+ 
+ static PyObject *
+@@ -2223,7 +2224,7 @@ test_datetime_capi(PyObject *self, PyObject *args) {
+     else
+         return NULL;
+ }
+-
++#endif
+ 
+ #ifdef WITH_THREAD
+ 
+@@ -4186,7 +4187,9 @@ static PyMethodDef TestMethods[] = {
+     {"set_errno",               set_errno,                       METH_VARARGS},
+     {"test_config",             (PyCFunction)test_config,        METH_NOARGS},
+     {"test_sizeof_c_types",     (PyCFunction)test_sizeof_c_types, METH_NOARGS},
++#if defined(Py_USING_UNICODE) && !defined(Py_BUILD_CORE)
+     {"test_datetime_capi",  test_datetime_capi,              METH_NOARGS},
++#endif
+     {"test_list_api",           (PyCFunction)test_list_api,      METH_NOARGS},
+     {"test_dict_iteration",     (PyCFunction)test_dict_iteration,METH_NOARGS},
+     {"dict_getitem_knownhash",  dict_getitem_knownhash,          METH_VARARGS},
+-- 
+2.14.2
+

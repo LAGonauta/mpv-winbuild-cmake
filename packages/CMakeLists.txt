@@ -138,6 +138,7 @@ list(APPEND ep
     flac
     opus-tools
     vapoursynth
+    python
 )
 foreach(package IN LISTS ep)
     include(${CMAKE_CURRENT_SOURCE_DIR}/${package}.cmake)
