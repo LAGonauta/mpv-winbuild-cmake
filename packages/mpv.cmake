@@ -20,7 +20,8 @@ ExternalProject_Add(mpv
         shaderc
         crossc
         vapoursynth
-    GIT_REPOSITORY git://github.com/mpv-player/mpv.git
+    GIT_REPOSITORY git://github.com/LAGonauta/mpv.git
+    GIT_TAG better_openal_clean
     UPDATE_COMMAND ""
     CONFIGURE_COMMAND ${EXEC}
         PKG_CONFIG=pkg-config
